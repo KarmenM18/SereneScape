@@ -1,31 +1,42 @@
 import React from 'react'
 
-function profiles() {
+function profiles({ Leaderboard }) { // pass object to return database.js leaderboard data insite this var
     return (
         <div id="profile">
-            {Item()}
+            {Item(Leaderboard)}
         </div>
     )
 }
 
-function Item() {
+function Item(data) {
     return (
-        <div className="flex">
-            <div className="item">
-                <img src="https://t3.ftcdn.net/jpg/03/67/46/48/360_F_367464887_f0w1JrL8PddfuH3P2jSPlIGjKU2BI0rn.jpg" alt="" />
 
-                <div className="info">
-                    <h3 className='name text-dark'>Name</h3>
-                    <span>Location</span>
-                </div>
-                </div>
+        <>
+            {
+                // iterate over database array to extract user info
+                data.map((value, index) => (
+                    <div className="flex">
+                        <div className="item">
+                            <img src={value.img} alt="" />
 
-            <div className="item">
-                <span>Score</span>
-            </div>
-        
+                            <div className="info">
+                                <h3 className='name text-dark'>{value.name}</h3>
+                                <span>{value.location}</span>
+                            </div>
+                        </div>
 
-        </div>
+                        <div className="item">
+                            <span>{value.score}</span>
+                        </div>
+
+
+                    </div>
+                ))
+            }
+
+        </>
+
+
 
     )
 
